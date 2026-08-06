@@ -784,6 +784,135 @@ body.is-fullscreen .task-input:placeholder-shown { display: none !important; }
 .alarm-subtitle { margin-top: 16px; font-size: 16px; color: var(--text-dim); letter-spacing: 2px; }
 .alarm-btn { margin-top: 40px; padding: 14px 48px; border-radius: 999px; background: var(--text); color: #000; border: none; font-size: 16px; font-weight: 600; cursor: pointer; transition: transform 0.2s; }
 .alarm-btn:hover { transform: scale(1.05); }
+
+/* ===== TimeFlow 付费 / VIP / 徽章 样式 ===== */
+/* 升级 VIP 入口（统计页底部卡片） */
+.vip-upgrade-card { margin-top: 28px; padding: 22px; text-align: center; background: var(--card); border: 1px solid var(--border); border-radius: 20px; }
+.vip-upgrade-card h3 { font-size: 18px; margin-bottom: 8px; }
+.vip-upgrade-card p { font-size: 13px; color: var(--text-dim); margin-bottom: 16px; line-height: 1.6; }
+.vip-upgrade-btn {
+  display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; border-radius: 14px;
+  border: none; cursor: pointer; background: linear-gradient(135deg, var(--accent), #a855f7);
+  color: #fff; font-size: 16px; font-weight: 700; transition: transform 0.2s, box-shadow 0.2s;
+}
+.vip-upgrade-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px var(--accent-glow, rgba(59,130,246,0.35)); }
+
+/* 通用深色弹窗（毛玻璃） */
+.tf-modal {
+  position: fixed; inset: 0; z-index: 300; background: rgba(0,0,0,0.86);
+  display: none; align-items: center; justify-content: center; padding: 16px; backdrop-filter: blur(12px);
+}
+.tf-modal.show { display: flex; }
+.tf-modal-box {
+  position: relative; width: 100%; max-width: 420px; max-height: 86vh; overflow-y: auto;
+  background: #111; border: 1px solid rgba(255,255,255,0.1); border-radius: 22px; padding: 26px 22px; animation: cardIn 0.4s ease;
+}
+.tf-modal-box h3 { font-size: 19px; margin-bottom: 6px; text-align: center; }
+.tf-modal-box .tf-sub { font-size: 13px; color: var(--text-dim); text-align: center; margin-bottom: 18px; line-height: 1.6; }
+.tf-close {
+  position: absolute; top: 14px; right: 16px; width: 32px; height: 32px; border: none;
+  background: transparent; color: var(--text-dim); font-size: 22px; cursor: pointer; border-radius: 8px;
+}
+.tf-close:hover { color: var(--text); background: rgba(255,255,255,0.08); }
+
+/* 功能对比表 */
+.vip-compare { width: 100%; border-collapse: collapse; margin-bottom: 16px; font-size: 14px; }
+.vip-compare td { padding: 9px 6px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.vip-compare .feat { color: var(--text); }
+.vip-compare .free { text-align: center; color: var(--text-dim); }
+.vip-compare .vipcol { text-align: center; color: var(--accent); font-weight: 700; }
+.vip-compare .ok { color: #34d399; }
+.vip-compare .no { color: #6b7280; }
+.vip-price { text-align: center; font-size: 15px; margin-bottom: 4px; }
+.vip-price b { color: var(--accent); font-size: 20px; }
+.vip-note { text-align: center; font-size: 12px; color: var(--text-dim); margin-bottom: 16px; line-height: 1.6; }
+
+/* 收款码 / 输入框 */
+.vip-qr { width: 200px; max-width: 70%; border-radius: 12px; margin: 0 auto 12px; display: block; border: 1px solid rgba(255,255,255,0.08); }
+.vip-qr-fallback { font-size: 12px; color: var(--text-dim); margin-bottom: 12px; text-align: center; line-height: 1.5; }
+.tf-input {
+  width: 100%; padding: 11px 14px; border-radius: 10px; border: 1px solid var(--border);
+  background: var(--card); color: var(--text); font-size: 14px; outline: none; box-sizing: border-box;
+  margin-bottom: 10px; font-family: inherit;
+}
+.tf-input:focus { border-color: var(--accent); }
+.vip-code-box {
+  background: rgba(59,130,246,0.1); border: 1px dashed var(--accent); border-radius: 10px;
+  padding: 12px; text-align: center; font-family: 'SF Mono', monospace; font-size: 18px;
+  color: var(--accent); letter-spacing: 1px; margin: 8px 0; word-break: break-all; display: none;
+}
+.tf-btn {
+  width: 100%; padding: 12px; border-radius: 12px; border: none; cursor: pointer;
+  background: var(--accent); color: #fff; font-size: 15px; font-weight: 700; transition: opacity 0.2s; margin-top: 4px;
+}
+.tf-btn:hover { opacity: 0.9; }
+.tf-btn.secondary { background: rgba(255,255,255,0.08); color: var(--text); }
+.tf-btn-row { display: flex; gap: 10px; }
+.tf-btn-row .tf-btn { flex: 1; }
+.tf-msg { font-size: 12px; text-align: center; margin-top: 8px; min-height: 16px; }
+.tf-msg.ok { color: #34d399; }
+.tf-msg.err { color: #f87171; }
+
+/* 付费墙提醒 */
+.paywall-icon { font-size: 40px; text-align: center; margin-bottom: 8px; }
+.paywall-desc { font-size: 14px; color: var(--text-dim); text-align: center; line-height: 1.7; margin-bottom: 18px; }
+.paywall-desc b { color: var(--accent); }
+
+/* 趋势图付费墙占位 + 7/30 切换 */
+.trend-locked {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px;
+  padding: 36px 16px; border: 1px dashed var(--border); border-radius: 14px; color: var(--text-dim);
+  margin-top: 12px; cursor: pointer; transition: all 0.2s;
+}
+.trend-locked:hover { border-color: var(--accent); color: var(--text); }
+.trend-locked .lock-ico { font-size: 32px; }
+.trend-toggle { display: flex; gap: 8px; justify-content: center; margin: 12px 0 4px; }
+.trend-toggle button {
+  padding: 5px 14px; border-radius: 999px; border: 1px solid var(--border);
+  background: transparent; color: var(--text-dim); font-size: 13px; cursor: pointer; transition: all 0.2s;
+}
+.trend-toggle button.active { color: var(--accent); border-color: var(--accent); background: rgba(59,130,246,0.1); }
+
+/* 徽章墙 */
+.badge-wall { margin-top: 30px; }
+.badge-wall h3 { font-size: 18px; margin-bottom: 14px; text-align: center; }
+.badge-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+@media (max-width: 480px) { .badge-grid { grid-template-columns: repeat(2, 1fr); } }
+.badge-item { position: relative; padding: 16px 10px; border-radius: 16px; text-align: center; border: 1px solid var(--border); background: var(--card); transition: all 0.3s; }
+.badge-item .badge-icon { font-size: 34px; display: block; line-height: 1; }
+.badge-item .badge-name { display: block; font-size: 13px; margin-top: 8px; color: var(--text); }
+.badge-item .badge-meta { display: block; font-size: 11px; margin-top: 4px; color: var(--text-faint); }
+.badge-item.unlocked {
+  border-color: rgba(251,191,36,0.5); background: linear-gradient(160deg, rgba(251,191,36,0.12), rgba(251,191,36,0.02));
+  box-shadow: 0 0 18px rgba(251,191,36,0.18); animation: badgeGlow 2.4s ease-in-out infinite;
+}
+.badge-item.unlocked .badge-icon { filter: drop-shadow(0 0 6px rgba(251,191,36,0.6)); }
+.badge-item.unlocked .badge-meta { color: #fbbf24; }
+.badge-item.locked { opacity: 0.55; }
+.badge-item.locked .badge-icon { filter: grayscale(1); }
+.badge-honor { grid-column: 1 / -1; margin-top: 6px; border: 1px solid #fbbf24; background: linear-gradient(135deg, rgba(251,191,36,0.2), rgba(168,85,247,0.12)); box-shadow: 0 0 26px rgba(251,191,36,0.35); }
+.badge-honor .badge-name { color: #fbbf24; font-weight: 700; }
+@keyframes badgeGlow { 0%,100% { box-shadow: 0 0 14px rgba(251,191,36,0.15); } 50% { box-shadow: 0 0 24px rgba(251,191,36,0.35); } }
+
+/* 徽章解锁庆祝 toast */
+.badge-toast-mask { position: fixed; inset: 0; z-index: 400; background: rgba(0,0,0,0.6); display: none; align-items: center; justify-content: center; backdrop-filter: blur(4px); }
+.badge-toast-mask.show { display: flex; }
+.badge-toast {
+  position: relative; width: 300px; max-width: 86vw; text-align: center; padding: 30px 24px;
+  border-radius: 22px; background: linear-gradient(160deg, #1a1408, #111); border: 1px solid #fbbf24;
+  box-shadow: 0 0 40px rgba(251,191,36,0.4); animation: cardIn 0.4s ease;
+}
+.badge-toast .bt-emoji { font-size: 56px; line-height: 1; animation: btPop 0.5s ease; }
+.badge-toast .bt-title { font-size: 18px; color: #fbbf24; font-weight: 700; margin: 12px 0 6px; }
+.badge-toast .bt-name { font-size: 16px; color: #fff; margin-bottom: 8px; }
+.badge-toast .bt-desc { font-size: 13px; color: var(--text-dim); line-height: 1.6; margin-bottom: 18px; }
+@keyframes btPop { 0% { transform: scale(0.3); opacity: 0; } 70% { transform: scale(1.15); } 100% { transform: scale(1); opacity: 1; } }
+
+/* 移动端：弹窗宽度自适应 */
+@media (max-width: 480px) {
+  .tf-modal-box { padding: 22px 16px; }
+  .vip-compare { font-size: 13px; }
+}
 </style>
 </head>
 <body>
@@ -1064,12 +1193,23 @@ body.is-fullscreen .task-input:placeholder-shown { display: none !important; }
         <div class="stats-card-label">学习次数</div>
       </div>
     </div>
-    <h3 class="stats-subtitle">近7天专注时长</h3>
+    <h3 class="stats-subtitle" id="trendTitle">近7天专注时长</h3>
     <div class="stats-chart" id="statsChart"></div>
     <div class="stats-empty" id="statsEmpty">
       <div class="stats-empty-icon">📝</div>
       <p>开始你的第一个专注吧</p>
     </div>
+
+    <!-- 升级 VIP 入口 -->
+    <div class="vip-upgrade-card" id="vipUpgradeCard">
+      <h3>⭐ 解锁 TimeFlow VIP</h3>
+      <p>白噪音混音 · 自动循环 · 历史趋势 · 成就徽章<br>4.9元/月，不到一杯奶茶钱</p>
+      <button class="vip-upgrade-btn" id="vipUpgradeBtn">升级 VIP</button>
+    </div>
+
+    <!-- 徽章墙（VIP 功能，公测期免费体验） -->
+    <div class="badge-wall" id="badgeWall"><h3>🏅 徽章墙</h3><div class="badge-grid" id="badgeGrid"></div></div>
+
   </div>
 </section>
 
@@ -1628,6 +1768,8 @@ try {
 
   btn.onclick = () => {
     getAudioCtx();
+    const willActivate = !btn.classList.contains('active');
+    if (willActivate && noise.activeIds.size >= 1 && !showPaywall('noiseMix', '白噪音混音')) return;
     btn.classList.toggle('active');
     noise.toggleActive(t.id);
     volSlider.classList.toggle('visible', btn.classList.contains('active'));
@@ -2429,6 +2571,7 @@ function addStats(type, val) {
   if (type === 'pomodoro') s[key].pomodoro += val;
   if (type === 'sessions') s[key].sessions += val;
   saveStats(s);
+  if (type === 'pomodoro' || type === 'sessions') tfRecordSession();
 }
 
 function renderStats() {
@@ -2472,6 +2615,10 @@ function renderStats() {
     wrap.appendChild(lb);
     chartEl.appendChild(wrap);
   });
+
+  // 趋势图付费墙 + 徽章墙
+  tfRenderTrend();
+  tfRenderBadgeWall();
 
   // 空状态
   const hasData = td.focusSec > 0 || td.pomodoro > 0 || td.sessions > 0;
@@ -2540,6 +2687,9 @@ let autoCycle = false, cyclePhase = 'work', cycleCount = 0;
 const autoCycleToggle = document.getElementById('autoCycleToggle');
 const cycleInfo = document.getElementById('cycleInfo');
 autoCycleToggle.addEventListener('change', () => {
+  if (autoCycleToggle.checked) {
+    if (!showPaywall('autoCycle', '自动循环')) { autoCycleToggle.checked = false; return; }
+  }
   autoCycle = autoCycleToggle.checked;
   if (autoCycle) {
     cyclePhase = 'work'; cycleCount = 0;
@@ -2938,5 +3088,343 @@ if (helpBtn) helpBtn.onclick = () => { if (!tourActive) startTour(true); };
 
 <!-- 免费访问统计：不蒜子（零注册，国内可用）。部署到线上后自动开始计数 -->
 <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!-- ===== TimeFlow VIP / 付费墙 / 徽章 弹窗 ===== -->
+<!-- VIP 功能对比 -->
+<div class="tf-modal" id="vipModal">
+  <div class="tf-modal-box">
+    <button class="tf-close" data-close="vipModal">×</button>
+    <h3>⭐ 升级 TimeFlow VIP</h3>
+    <p class="tf-sub">一杯奶茶钱，换一整月沉浸学习空间</p>
+    <table class="vip-compare">
+      <tr><td class="feat">倒计时 + 任务备注</td><td class="free">✅</td><td class="vipcol">✅</td></tr>
+      <tr><td class="feat">学习法转盘 + 教程</td><td class="free">✅</td><td class="vipcol">✅</td></tr>
+      <tr><td class="feat">白噪音单音效</td><td class="free">✅</td><td class="vipcol">✅</td></tr>
+      <tr><td class="feat">白噪音混音</td><td class="free no">❌</td><td class="vipcol ok">✅</td></tr>
+      <tr><td class="feat">自动循环</td><td class="free no">❌</td><td class="vipcol ok">✅</td></tr>
+      <tr><td class="feat">历史趋势图</td><td class="free no">❌</td><td class="vipcol ok">✅</td></tr>
+      <tr><td class="feat">成就徽章</td><td class="free no">❌</td><td class="vipcol ok">✅</td></tr>
+    </table>
+    <div class="vip-price">月付 <b>4.9</b> 元/月 &nbsp;·&nbsp; 年付 <b>19.9</b> 元/年</div>
+    <p class="vip-note">考虑到大家预算不宽裕。4.9元不到一杯奶茶，换一整月沉浸学习空间 ❤️</p>
+    <button class="tf-btn" id="vipGoActivate">立即升级</button>
+  </div>
+</div>
+
+<!-- VIP 激活（收款码 + 邮箱 + 激活码） -->
+<div class="tf-modal" id="activateModal">
+  <div class="tf-modal-box">
+    <button class="tf-close" data-close="activateModal">×</button>
+    <h3>激活 TimeFlow VIP</h3>
+    <p class="tf-sub">扫码付款后，填写邮箱获取激活码</p>
+    <img class="vip-qr" id="vipQrImg" src="assets/wx-pay.png" alt="微信收款码" onerror="this.style.display='none';var f=document.getElementById('vipQrFallback');if(f)f.style.display='block';">
+    <p class="vip-qr-fallback" id="vipQrFallback" style="display:none;">请将微信收款码图片命名为 <b>wx-pay.png</b> 放到网站 <b>assets/</b> 文件夹后刷新即可显示。付款请直接微信扫码（开发者微信收款码），付款后填写邮箱获取激活码。</p>
+    <input class="tf-input" id="vipEmail" type="email" placeholder="请输入你的邮箱（用于生成激活码）">
+    <button class="tf-btn" id="vipGetCode">获取激活码</button>
+    <div class="vip-code-box" id="vipCodeBox"></div>
+    <p class="tf-msg" id="vipGetMsg"></p>
+    <input class="tf-input" id="vipCodeInput" type="text" placeholder="粘贴激活码，如 VIP-20260806-1234-AB7K">
+    <button class="tf-btn secondary" id="vipVerifyBtn">验证激活码</button>
+    <p class="tf-msg" id="vipVerifyMsg"></p>
+  </div>
+</div>
+
+<!-- 付费墙提醒 -->
+<div class="tf-modal" id="paywallModal">
+  <div class="tf-modal-box">
+    <button class="tf-close" data-close="paywallModal">×</button>
+    <div class="paywall-icon" id="paywallIcon">💡</div>
+    <h3 id="paywallTitle"></h3>
+    <div class="paywall-desc" id="paywallDesc"></div>
+    <div class="tf-btn-row">
+      <button class="tf-btn secondary" id="paywallContinue">继续免费体验</button>
+      <button class="tf-btn" id="paywallLearn">了解 VIP</button>
+    </div>
+  </div>
+</div>
+
+<!-- 徽章解锁庆祝 -->
+<div class="badge-toast-mask" id="badgeToast">
+  <div class="badge-toast">
+    <div class="bt-emoji" id="btEmoji">🎉</div>
+    <div class="bt-title">恭喜解锁！</div>
+    <div class="bt-name" id="btName"></div>
+    <div class="bt-desc" id="btDesc"></div>
+    <button class="tf-btn" id="btClose">太棒了！</button>
+  </div>
+</div>
+
+
+<script>
+// ===== TimeFlow VIP / 付费墙 / 公测 / 徽章 系统 =====
+(function(){
+  'use strict';
+  var BETA_DAYS = 10;
+  var PAYWALL_FEATURES = { noiseMix:'白噪音混音', autoCycle:'自动循环', trend:'历史趋势图', badge:'成就徽章' };
+
+  function getFirstVisit(){
+    var fv = localStorage.getItem('tf_firstVisit');
+    if(!fv){ fv = String(Date.now()); localStorage.setItem('tf_firstVisit', fv); }
+    return parseInt(fv,10);
+  }
+  function betaRemaining(){
+    var passed = (Date.now() - getFirstVisit())/86400000;
+    return Math.max(0, Math.ceil(BETA_DAYS - passed));
+  }
+  function inBeta(){ return betaRemaining() > 0; }
+
+  function isVip(){
+    if(localStorage.getItem('tf_isVip') !== 'true') return false;
+    var d = localStorage.getItem('tf_vipActivateDate');
+    if(d){ var days = (Date.now() - parseInt(d,10))/86400000; if(days > 365){ localStorage.setItem('tf_isVip','false'); return false; } }
+    return true;
+  }
+  function canUseVipFeature(key){ if(isVip()) return true; if(inBeta()) return true; return false; }
+
+  function showPaywall(key, name){
+    name = name || PAYWALL_FEATURES[key] || '该功能';
+    if(isVip()) return true;
+    var modal = document.getElementById('paywallModal');
+    var title = document.getElementById('paywallTitle');
+    var desc = document.getElementById('paywallDesc');
+    var icon = document.getElementById('paywallIcon');
+    if(inBeta()){
+      var rem = betaRemaining();
+      icon.textContent = '💡';
+      title.textContent = '“' + name + '”目前处于公测免费体验期';
+      desc.innerHTML = '还剩 <b>' + rem + '</b> 天<br>公测结束后，此功能将仅限 VIP 用户使用。';
+      if(sessionStorage.getItem('tf_pw_' + key)) return true;
+      sessionStorage.setItem('tf_pw_' + key, '1');
+      modal.classList.add('show');
+      return true;
+    } else {
+      icon.textContent = '🔒';
+      title.textContent = '“' + name + '”已结束公测';
+      desc.innerHTML = '此功能仅限 <b>VIP 用户</b> 使用<br>升级 VIP 解锁全部高级功能：白噪音混音 · 自动循环 · 历史趋势 · 成就徽章';
+      modal.classList.add('show');
+      return false;
+    }
+  }
+
+  var trendRange = 7;
+  function tfRenderTrend(){
+    var chartEl = document.getElementById('statsChart');
+    var titleEl = document.getElementById('trendTitle');
+    if(!chartEl) return;
+    if(!canUseVipFeature('trend')){
+      if(titleEl) titleEl.style.display = 'none';
+      chartEl.innerHTML = `<div class="trend-locked" id="trendLocked"><div class="lock-ico">🔒</div><div>历史趋势图 · VIP 专享</div><div style="font-size:12px">查看你的专注成长曲线</div></div>`;
+      var lock = document.getElementById('trendLocked');
+      if(lock) lock.onclick = function(){ showPaywall('trend','历史趋势图'); };
+      return;
+    }
+    if(titleEl){
+      titleEl.style.display = '';
+      titleEl.innerHTML = `近${trendRange}天专注时长 <span style="font-size:12px;color:var(--text-faint)">（VIP）</span>`;
+    }
+    var toggle = document.getElementById('trendToggle');
+    if(!toggle){
+      toggle = document.createElement('div');
+      toggle.className = 'trend-toggle';
+      toggle.id = 'trendToggle';
+      toggle.innerHTML = `<button data-r="7">近7天</button><button data-r="30">近30天</button>`;
+      chartEl.parentNode.insertBefore(toggle, chartEl);
+      var btns = toggle.querySelectorAll('button');
+      for(var i=0;i<btns.length;i++){
+        (function(b){ b.onclick = function(){ trendRange = parseInt(b.getAttribute('data-r'),10); tfRenderTrend(); }; })(btns[i]);
+      }
+    } else {
+      var bs = toggle.querySelectorAll('button');
+      for(var j=0;j<bs.length;j++){ bs[j].className = (parseInt(bs[j].getAttribute('data-r'),10)===trendRange)?'active':''; }
+    }
+    var s = getStats();
+    chartEl.innerHTML = '';
+    var days = [];
+    var wk = ['日','一','二','三','四','五','六'];
+    for(var k=trendRange-1;k>=0;k--){
+      var d = new Date(); d.setDate(d.getDate()-k);
+      var dk = d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+      var dd = s[dk] || { focusSec:0 };
+      days.push({ label:(k===0?'今天':wk[d.getDay()]), val:Math.floor(dd.focusSec/60) });
+    }
+    var maxVal = 1;
+    for(var mm=0;mm<days.length;mm++){ if(days[mm].val>maxVal) maxVal = days[mm].val; }
+    for(var n=0;n<days.length;n++){
+      var wrap = document.createElement('div'); wrap.className = 'stats-bar-wrap';
+      var bar = document.createElement('div'); bar.className = 'stats-bar';
+      bar.style.height = Math.max(4, (days[n].val/maxVal)*110) + 'px';
+      bar.title = days[n].val + ' 分钟';
+      if(days[n].val === 0) bar.style.opacity = '0.3';
+      var vl = document.createElement('div'); vl.className = 'stats-bar-val';
+      vl.textContent = days[n].val >= 60 ? Math.floor(days[n].val/60)+'h' : days[n].val+'m';
+      var lb = document.createElement('div'); lb.className = 'stats-bar-label'; lb.textContent = days[n].label;
+      wrap.appendChild(bar); wrap.appendChild(vl); wrap.appendChild(lb);
+      chartEl.appendChild(wrap);
+    }
+  }
+
+  var BADGES = [
+    { id:'badge_1', icon:'🌱', name:'初行者', cond:'完成1个专注时段', desc:'你迈出了第一步，一切由此开始', need:function(d){ return d.totalSessions>=1; } },
+    { id:'badge_2', icon:'🔥', name:'三日热忱', cond:'连续3天', desc:'连续三天的坚持，开始有点感觉了', need:function(d){ return d.consecutiveDays>=3; } },
+    { id:'badge_3', icon:'💪', name:'一周坚持', cond:'连续7天', desc:'一周了，你已经超过大多数人了', need:function(d){ return d.consecutiveDays>=7; } },
+    { id:'badge_4', icon:'📈', name:'百锤千炼', cond:'累计100个', desc:'100次专注，你已脱胎换骨', need:function(d){ return d.totalSessions>=100; } },
+    { id:'badge_5', icon:'👑', name:'长期主义', cond:'连续30天', desc:'30天不间断，你是真正的长期主义者', need:function(d){ return d.consecutiveDays>=30; } },
+    { id:'badge_6', icon:'🏆', name:'大师', cond:'累计500个', desc:'专注大师，你已经是别人的灯塔了', need:function(d){ return d.totalSessions>=500; } }
+  ];
+  function getBadgeData(){ try{ return JSON.parse(localStorage.getItem('tf_badges')); }catch(e){ return null; } }
+  function defaultBadgeData(){ return { totalSessions:0, consecutiveDays:0, lastFocusDate:'', dailySessions:{}, unlockedBadges:[], badgeUnlockTime:{}, honorUnlocked:false }; }
+  function saveBadgeData(d){ try{ localStorage.setItem('tf_badges', JSON.stringify(d)); }catch(e){} }
+  function todayStr(){ var t=new Date(); return t.getFullYear()+'-'+String(t.getMonth()+1).padStart(2,'0')+'-'+String(t.getDate()).padStart(2,'0'); }
+
+  function recordFocusSession(){
+    var d = getBadgeData(); if(!d) d = defaultBadgeData();
+    d.totalSessions += 1;
+    var t = todayStr();
+    d.dailySessions[t] = (d.dailySessions[t]||0) + 1;
+    if(d.lastFocusDate !== t){
+      var y = new Date(); y.setDate(y.getDate()-1);
+      var yk = y.getFullYear()+'-'+String(y.getMonth()+1).padStart(2,'0')+'-'+String(y.getDate()).padStart(2,'0');
+      d.consecutiveDays = (d.lastFocusDate === yk) ? d.consecutiveDays + 1 : 1;
+      d.lastFocusDate = t;
+    }
+    var newly = [];
+    for(var i=0;i<BADGES.length;i++){
+      var b = BADGES[i];
+      if(d.unlockedBadges.indexOf(b.id) === -1 && b.need(d)){
+        d.unlockedBadges.push(b.id);
+        d.badgeUnlockTime[b.id] = new Date().toLocaleString('zh-CN');
+        newly.push(b);
+      }
+    }
+    if(d.unlockedBadges.length === 6 && !d.honorUnlocked){
+      d.honorUnlocked = true;
+      newly.push({ id:'honor', icon:'🌟', name:'长期主义之光', desc:'连续专注的长期主义者，向您致敬。' });
+    }
+    saveBadgeData(d);
+    if(newly.length){ for(var j=0;j<newly.length;j++){ showBadgeToast(newly[j]); } }
+  }
+
+  function showBadgeToast(b){
+    var mask = document.getElementById('badgeToast');
+    document.getElementById('btEmoji').textContent = b.icon;
+    document.getElementById('btName').textContent = b.name;
+    document.getElementById('btDesc').textContent = b.desc || '';
+    mask.classList.add('show');
+    clearTimeout(mask._t);
+    mask._t = setTimeout(function(){ mask.classList.remove('show'); }, 3500);
+  }
+
+  function tfRenderBadgeWall(){
+    var grid = document.getElementById('badgeGrid');
+    if(!grid) return;
+    if(!canUseVipFeature('badge')){
+      grid.innerHTML = `<div class="trend-locked" id="badgeLocked" style="grid-column:1/-1"><div class="lock-ico">🔒</div><div>成就徽章 · VIP 专享</div><div style="font-size:12px">专注解锁专属荣誉</div></div>`;
+      var lock = document.getElementById('badgeLocked');
+      if(lock) lock.onclick = function(){ showPaywall('badge','成就徽章'); };
+      return;
+    }
+    var d = getBadgeData() || defaultBadgeData();
+    grid.innerHTML = '';
+    for(var i=0;i<BADGES.length;i++){
+      var b = BADGES[i];
+      var un = d.unlockedBadges.indexOf(b.id) !== -1;
+      var item = document.createElement('div');
+      item.className = 'badge-item ' + (un?'unlocked':'locked');
+      var meta = un ? ('解锁于 ' + (d.badgeUnlockTime[b.id]||'').slice(0,10)) : b.cond;
+      item.innerHTML = `<span class="badge-icon">${b.icon}</span><span class="badge-name">${b.name}</span><span class="badge-meta">${meta}</span>`;
+      grid.appendChild(item);
+    }
+    if(d.honorUnlocked){
+      var h = document.createElement('div');
+      h.className = 'badge-item unlocked badge-honor';
+      h.innerHTML = `<span class="badge-icon">🌟</span><span class="badge-name">长期主义之光</span><span class="badge-meta">向您致敬</span>`;
+      grid.appendChild(h);
+    }
+  }
+
+  function genVipCode(email){
+    var now = new Date();
+    var ymd = '' + now.getFullYear() + String(now.getMonth()+1).padStart(2,'0') + String(now.getDate()).padStart(2,'0');
+    var pre = (email||'').slice(0,4).toUpperCase();
+    var chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+    var rnd = '';
+    for(var i=0;i<4;i++){ rnd += chars.charAt(Math.floor(Math.random()*chars.length)); }
+    return 'VIP-' + ymd + '-' + (pre||'XXXX') + '-' + rnd;
+  }
+  function verifyVipCode(code, email){
+    if(!code || typeof code !== 'string') return false;
+    var m = code.trim().toUpperCase().match(/^VIP-(\d{8})-([A-Z0-9]{1,4})-([A-Z0-9]{4})$/);
+    if(!m) return false;
+    var ymd = m[1];
+    var yr = parseInt(ymd.slice(0,4),10), mo = parseInt(ymd.slice(4,6),10)-1, da = parseInt(ymd.slice(6,8),10);
+    var dt = new Date(yr, mo, da);
+    if(isNaN(dt) || dt.getFullYear()!==yr || dt.getMonth()!==mo || dt.getDate()!==da) return false;
+    var ageDays = (Date.now() - dt.getTime())/86400000;
+    if(ageDays < 0 || ageDays > 365) return false;
+    if(email){
+      var pre = email.slice(0,4).toUpperCase();
+      if(m[2] !== pre && m[2] !== 'XXXX') return false;
+    }
+    return true;
+  }
+
+  function openModal(id){ var m=document.getElementById(id); if(m) m.classList.add('show'); }
+  function closeModal(id){ var m=document.getElementById(id); if(m) m.classList.remove('show'); }
+  function openVipModal(){ openModal('vipModal'); }
+  function openActivate(){ closeModal('vipModal'); openModal('activateModal'); }
+
+  function bindUI(){
+    var upBtn = document.getElementById('vipUpgradeBtn'); if(upBtn) upBtn.onclick = openVipModal;
+    var go = document.getElementById('vipGoActivate'); if(go) go.onclick = openActivate;
+    var getCode = document.getElementById('vipGetCode');
+    if(getCode) getCode.onclick = function(){
+      var email = (document.getElementById('vipEmail').value||'').trim();
+      var msg = document.getElementById('vipGetMsg');
+      if(!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){ msg.textContent='请输入有效的邮箱地址'; msg.className='tf-msg err'; return; }
+      var code = genVipCode(email);
+      var box = document.getElementById('vipCodeBox');
+      box.textContent = code; box.style.display = 'block';
+      msg.textContent = '激活码已生成，请复制保存（有效期365天）'; msg.className='tf-msg ok';
+    };
+    var verify = document.getElementById('vipVerifyBtn');
+    if(verify) verify.onclick = function(){
+      var code = (document.getElementById('vipCodeInput').value||'').trim();
+      var email = (document.getElementById('vipEmail').value||'').trim();
+      var msg = document.getElementById('vipVerifyMsg');
+      if(verifyVipCode(code, email)){
+        localStorage.setItem('tf_isVip','true');
+        localStorage.setItem('tf_vipEmail', email);
+        localStorage.setItem('tf_vipCode', code.toUpperCase());
+        localStorage.setItem('tf_vipActivateDate', String(Date.now()));
+        msg.textContent = '✅ 激活成功！VIP 功能已解锁'; msg.className='tf-msg ok';
+        setTimeout(function(){ closeModal('activateModal'); if(typeof renderStats==='function') renderStats(); }, 1200);
+      } else {
+        msg.textContent = '激活码无效或已过期，请检查后重试'; msg.className='tf-msg err';
+      }
+    };
+    var pwContinue = document.getElementById('paywallContinue'); if(pwContinue) pwContinue.onclick = function(){ closeModal('paywallModal'); };
+    var pwLearn = document.getElementById('paywallLearn'); if(pwLearn) pwLearn.onclick = function(){ closeModal('paywallModal'); openVipModal(); };
+    var closers = document.querySelectorAll('[data-close]');
+    for(var i=0;i<closers.length;i++){ closers[i].onclick = function(){ closeModal(this.getAttribute('data-close')); }; }
+    var modals = document.querySelectorAll('.tf-modal');
+    for(var j=0;j<modals.length;j++){ modals[j].addEventListener('click', function(e){ if(e.target===this) this.classList.remove('show'); }); }
+    var btClose = document.getElementById('btClose'); if(btClose) btClose.onclick = function(){ closeModal('badgeToast'); };
+    var btMask = document.getElementById('badgeToast'); if(btMask) btMask.addEventListener('click', function(e){ if(e.target===btMask) btMask.classList.remove('show'); });
+  }
+
+  window.showPaywall = showPaywall;
+  window.tfRecordSession = recordFocusSession;
+  window.tfRenderTrend = tfRenderTrend;
+  window.tfRenderBadgeWall = tfRenderBadgeWall;
+
+  if(document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bindUI);
+  else bindUI();
+
+  if(isVip() && typeof renderStats === 'function'){
+    setTimeout(function(){ try{ renderStats(); }catch(e){} }, 300);
+  }
+})();
+</script>
+
 </body>
 </html>
