@@ -532,6 +532,10 @@ body.custom-bg::before {
 /* ===== 背景选择器（其余样式见 .side-buttons > button） ===== */
 .bg-toggle-btn { font-size: 20px; }
 .bg-toggle-btn:hover { color: var(--text); background: rgba(255,255,255,0.08); }
+/* ===== VIP 入口按钮（左侧按钮组） ===== */
+.vip-side-btn { font-size: 22px; color: #ffd479; border-color: rgba(255,212,121,0.35); background: rgba(40,32,12,0.88); }
+.vip-side-btn:hover { color: #fff; background: linear-gradient(135deg, #f0a500, #ffcf4d); border-color: transparent; transform: translateY(-1px); box-shadow: 0 4px 14px rgba(255,180,40,0.35); }
+.vip-side-btn.active { color: #1a1a1a; background: linear-gradient(135deg, #ffcf4d, #f0a500); border-color: transparent; }
 /* ===== 网站访问统计（不蒜子，免费零注册） ===== */
 .site-stats { position: fixed; right: 14px; bottom: 14px; z-index: 80; font-size: 11px; color: var(--text-dim); opacity: 0.5; pointer-events: none; user-select: none; }
 .site-stats b { color: var(--text); font-weight: 600; }
@@ -961,6 +965,8 @@ body.is-fullscreen .task-input:placeholder-shown { display: none !important; }
 
 <button class="announcement-btn" id="announcementBtn" title="系统公告">🔔</button>
 
+<button class="vip-side-btn" id="vipSideBtn" title="升级 VIP">👑</button>
+
 <button class="reward-btn" id="rewardBtn" title="支持一下">☕</button>
 </div>
 
@@ -1198,13 +1204,6 @@ body.is-fullscreen .task-input:placeholder-shown { display: none !important; }
     <div class="stats-empty" id="statsEmpty">
       <div class="stats-empty-icon">📝</div>
       <p>开始你的第一个专注吧</p>
-    </div>
-
-    <!-- 升级 VIP 入口 -->
-    <div class="vip-upgrade-card" id="vipUpgradeCard">
-      <h3>⭐ 解锁 TimeFlow VIP</h3>
-      <p>白噪音混音 · 自动循环 · 历史趋势 · 成就徽章<br>4.9元/月，不到一杯奶茶钱</p>
-      <button class="vip-upgrade-btn" id="vipUpgradeBtn">升级 VIP</button>
     </div>
 
     <!-- 徽章墙（VIP 功能，公测期免费体验） -->
@@ -3373,8 +3372,15 @@ if (helpBtn) helpBtn.onclick = () => { if (!tourActive) startTour(true); };
   function openVipModal(){ openModal('vipModal'); }
   function openActivate(){ closeModal('vipModal'); openModal('activateModal'); }
 
+  function updateVipSideBtn(){
+    var b = document.getElementById('vipSideBtn'); if(!b) return;
+    if(isVip()){ b.classList.add('active'); b.title = 'VIP 已激活 · 点击查看'; }
+    else { b.classList.remove('active'); b.title = '升级 VIP'; }
+  }
   function bindUI(){
-    var upBtn = document.getElementById('vipUpgradeBtn'); if(upBtn) upBtn.onclick = openVipModal;
+    var upBtn = document.getElementById('vipSideBtn'); if(upBtn) upBtn.onclick = openVipModal;
+    var oldUp = document.getElementById('vipUpgradeBtn'); if(oldUp) oldUp.onclick = openVipModal;
+    updateVipSideBtn();
     var go = document.getElementById('vipGoActivate'); if(go) go.onclick = openActivate;
     var getCode = document.getElementById('vipGetCode');
     if(getCode) getCode.onclick = function(){
@@ -3396,8 +3402,9 @@ if (helpBtn) helpBtn.onclick = () => { if (!tourActive) startTour(true); };
         localStorage.setItem('tf_vipEmail', email);
         localStorage.setItem('tf_vipCode', code.toUpperCase());
         localStorage.setItem('tf_vipActivateDate', String(Date.now()));
+        updateVipSideBtn();
         msg.textContent = '✅ 激活成功！VIP 功能已解锁'; msg.className='tf-msg ok';
-        setTimeout(function(){ closeModal('activateModal'); if(typeof renderStats==='function') renderStats(); }, 1200);
+        setTimeout(function(){ closeModal('activateModal'); if(typeof renderStats==='function') renderStats(); updateVipSideBtn(); }, 1200);
       } else {
         msg.textContent = '激活码无效或已过期，请检查后重试'; msg.className='tf-msg err';
       }
