@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wheel Test</title>
+<style>
+body { margin:0; background:#000; color:#fff; display:flex; align-items:center; justify-content:center; min-height:100vh; flex-direction:column; font-family:sans-serif; }
+.wheel-container { position:relative; width:440px; height:440px; }
+.wheel-svg { width:100%; height:100%; transition:transform 4s cubic-bezier(.22,.61,.36,1); transform-origin:center center; transform-box:fill-box; }
+.wheel-svg g,.wheel-svg path,.wheel-svg text { pointer-events:auto; }
+.wheel-pointer { position:absolute; top:-8px; left:50%; transform:translateX(-50%); width:0; height:0; border-left:14px solid transparent; border-right:14px solid transparent; border-top:24px solid #fff; z-index:10; }
+.wheel-center { position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); width:64px; height:64px; border-radius:50%; background:#000; border:2px solid rgba(255,255,255,.15); display:flex; align-items:center; justify-content:center; font-size:13px; color:#888; z-index:10; }
+.wheel-btn { margin-top:20px; padding:14px 44px; border-radius:999px; background:#fff; color:#000; border:none; font-size:16px; font-weight:600; cursor:pointer; }
+.wheel-btn:disabled { opacity:.4; cursor:not-allowed; }
+.result { margin-top:16px; font-size:18px; color:#4ade80; }
+</style>
+</head>
+<body>
+<div class="wheel-container">
+  <div class="wheel-pointer"></div>
+  <svg class="wheel-svg" id="ws" viewBox="0 0 440 440"><g id="wg"></g></svg>
+  <div class="wheel-center">学习</div>
+</div>
+<button class="wheel-btn" id="wb">开始转动</button>
+<div class="result" id="res"></div>
+
+<script>
+const methods = [
+  {name:'骰子决策',short:'骰子',color:'#FF6B6B'},
+  {name:'抛硬币',short:'硬币',color:'#4ECDC4'},
+  {name:'长度法',short:'长度',color:'#FFE66D'},
+  {name:'红绿灯',short:'红绿灯',color:'#FF6B6B'},
+  {name:'茶道',short:'茶道',color:'#95E1D3'},
+  {name:'色彩',short:'色彩',color:'#F38181'},
+  {name:'美食',short:'美食',color:'#AA96DA'},
+  {name:'动物',short:'动物',color:'#FCBAD3'},
+  {name:'扑克',short:'扑克',color:'#A8D8EA'},
+  {name:'常规',short:'常规',color:'#B8B5FF'},
+];
+const wg=document.getElementById('wg'),ws=document.getElementById('ws'),wb=document.getElementById('wb'),res=document.getElementById('res');
+const count=10,deg=36,R=210,C=220;
+function pol(r,a){const rd=(a-90)*Math.PI/180;return[C+r*Math.cos(rd),C+r*Math.sin(rd)];}
+function sector(cx,cy,r,a0,a1){const[x0,y0]=pol(r,a1),[x1,y1]=pol(r,a0),la=a1-a0<=180?0:1;return`M${cx}${cy} L${x0}${y0} A${r}${r} 0 ${la} 0 ${x1}${y1} Z`;}
+methods.forEach((m,i)=>{
+  const a0=i*deg,a1=(i+1)*deg;
+  const p=document.createElementNS('http://www.w3.org/2000/svg','path');
+  p.setAttribute('d',sector(C,C,R,a0,a1));
+  p.setAttribute('fill',m.color);p.setAttribute('stroke','#000');p.setAttribute('stroke-width','2');
+  p.style.cursor='pointer';
+  p.addEventListener('click',()=>{if(!spinning)res.textContent='选择了: '+m.name;});
+  wg.appendChild(p);
+  const ta=a0+deg/2,[tx,ty]=pol(R*.62,ta);
+  const t=document.createElementNS('http://www.w3.org/2000/svg','text');
+  t.setAttribute('x',tx);t.setAttribute('y',ty);
+  t.setAttribute('text-anchor','middle');t.setAttribute('dominant-baseline','middle');
+  t.setAttribute('fill','#000');t.setAttribute('font-size','18');t.setAttribute('font-weight','700');
+  t.setAttribute('transform','rotate('+ta+','+tx+','+ty+')');
+  t.style.cursor='pointer';t.textContent=m.short;
+  t.addEventListener('click',()=>{if(!spinning)res.textContent='选择了: '+m.name;});
+  wg.appendChild(t);
+});
+let curRot=0,spinning=false;
+wb.onclick=()=>{
+  if(spinning)return;
+  spinning=true;wb.disabled=true;wb.textContent='转动中...';res.textContent='';
+  curRot+=Math.floor(Math.random()*3+4)*360+Math.random()*360;
+  ws.style.transform='rotate('+curRot+'deg)';
+  setTimeout(()=>{
+    spinning=false;wb.disabled=false;wb.textContent='开始转动';
+    const norm=(360-(curRot%360))%360;
+    res.textContent='转到: '+methods[Math.floor(norm/deg)%count].name;
+  },4000);
+};
+console.log('Wheel test ready! wg has',wg.children.length,'children');
+</script>
+</body>
+</html>
